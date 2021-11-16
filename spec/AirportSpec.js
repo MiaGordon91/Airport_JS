@@ -6,6 +6,8 @@ describe('Airport', () => {
 
   beforeEach(() => {
     airport = new Airport();
+
+    // created a spy that checks that the plan has landed.
     plane = jasmine.createSpy('plane', ['land']);
   });
   
@@ -16,6 +18,12 @@ describe('Airport', () => {
   it('can clear planes for landing', () => {
     airport.clearForLanding(plane);
     expect(airport.planes()).toEqual([plane]);
+  });
+
+  it('can clear planes for takeoff', () => {
+    airport.clearForLanding(plane);
+    airport.clearForTakeOff(plane);
+    expect(airport.planes()).toEqual([]);
   });
 });
 

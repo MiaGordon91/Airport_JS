@@ -7,10 +7,19 @@ describe('Plane', () => {
 
   beforeEach(() => {
     plane = new Plane();
-    airport = jasmine.createSpyObj('airport',['clearForLanding']);
+    // created a spy(double) that stubs the interaction between the plane
+    // and airport object - isolates the test. 
+    airport = jasmine.createSpyObj('airport',['clearForLanding','clearForTakeOff']);
   });
+
   it('can land plane at airport', () => {
     plane.land(airport);
     expect(airport.clearForLanding).toHaveBeenCalledWith(plane);
+  });
+
+  it('can takeoff plane at airport', () => {
+    plane.land(airport);
+    plane.takeoff();
+    expect(airport.clearForTakeOff).toHaveBeenCalled();
   });
 });
